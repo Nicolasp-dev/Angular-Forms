@@ -1,13 +1,17 @@
 <mat-card class="login-page">
   <mat-card-title>Login (Template-Driven)</mat-card-title>
   <mat-card-content>
-    <form class="login-form" #loginForm="ngForm">
+    <form
+      class="login-form"
+      #loginForm="ngForm"
+      (ngSubmit)="login(loginForm, $event)"
+    >
       <mat-form-field>
         <input
           matInput
           type="email"
           placeholder="Email"
-          ngModel
+          [ngModel]="loginForm.email"
           #email="ngModel"
           name="email"
           required
@@ -25,25 +29,38 @@
           {{ email.errors?.minlength.actualLength }}</mat-error
         >
 
-        <mat-error *ngIf="email.errors?.email"
-          >Invalid email</mat-error
-        >
+        <mat-error *ngIf="email.errors?.email">Invalid email</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input
           matInput
-          ngModel
+          [ngModel]="loginForm.password"
           name="password"
           required
           #password="ngModel"
           type="password"
           name="password"
           placeholder="Password"
+          passwordStrength
         />
+
+        <mat-error *ngIf="password.errors?.required"
+          >Password is mandatory</mat-error
+        >
+
+        <mat-error *ngIf="password.errors?.passwordStrength"
+          >Your password must have lower case, upper case and numeric
+          characters</mat-error
+        >
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="login(loginForm)">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!loginForm.valid"
+      >
         Login
       </button>
     </form>
