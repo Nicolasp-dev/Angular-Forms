@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { CoursesService } from "../../services/courses.service";
 import { courseTitleValidator } from "../../validators/course-title.validator";
+import { Observable } from "rxjs";
 
 interface CourseCategory {
   code: string;
@@ -28,6 +29,7 @@ export class CreateCourseStep1Component implements OnInit {
       },
     ],
     releasedAt: [new Date(), Validators.required],
+    category: ["BEGINNER", Validators.required],
     downloadsAllowed: [false, Validators.requiredTrue],
     longDescription: [
       "",
@@ -35,11 +37,15 @@ export class CreateCourseStep1Component implements OnInit {
     ],
   });
 
+  courseCategories$: Observable<CourseCategory[]>;
+
   get courseTitle() {
     return this.form.controls["title"];
   }
 
   constructor(private fb: FormBuilder, private courses: CoursesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.courseCategories$ = this.courses.findCourseCategories();
+  }
 }
