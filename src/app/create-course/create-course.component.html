@@ -1,71 +1,30 @@
-
-<div class="create-course-panel data-form">
-
+<div class="creat-course-panel data-form">
   <h2 class="title">Create New Course</h2>
 
-    <mat-horizontal-stepper [linear]="true"
-                            class="mat-elevation-z5" labelPosition="bottom">
+  <mat-horizontal-stepper [linear]="true" class="mat-elevation-z5">
+    <mat-step [stepControl]="step1.form">
+      <ng-template matStepLabel> Course landing page details </ng-template>
 
-        <mat-step [stepControl]="step1.form" errorMessage="Landing page in error">
+      <create-course-step-1 #step1></create-course-step-1>
 
-            <ng-template matStepLabel>course landing page details</ng-template>
+      <div class="stepper-buttons">
+        <button mat-raised-button color="primary" matStepperNext>
+          Continue to step 2
+        </button>
+      </div>
+    </mat-step>
 
-            <create-course-step-1 #step1></create-course-step-1>
+    <mat-step>
+      <ng-template matStepLabel>Course pricing details </ng-template>
 
-            <div class="stepper-buttons">
+      <create-course-step-2></create-course-step-2>
 
-                <button mat-raised-button color="primary" matStepperNext>
-                    Continue to Step 2</button>
-            </div>
-
-        </mat-step>
-
-
-        <mat-step [stepControl]="step2.form" errorMessage="Pricing in error">
-
-            <create-course-step-2 #step2></create-course-step-2>
-
-            <ng-template matStepLabel>course pricing details</ng-template>
-
-            <div class="stepper-buttons">
-
-                <button mat-raised-button matStepperPrevious>Back</button>
-
-                <button mat-raised-button color="primary" matStepperNext>
-                    Continue to Step 3</button>
-
-            </div>
-
-
-        </mat-step>
-
-        <mat-step [stepControl]="step3.form" errorMessage="Course lessons in error">
-
-            <ng-template matStepLabel>course lessons</ng-template>
-
-            <create-course-step-3 #step3></create-course-step-3>
-
-            <div class="stepper-buttons">
-
-                <button mat-raised-button matStepperPrevious>Back</button>
-
-                <button mat-raised-button color="primary"
-                    [disabled]="!step3.form.valid || step3.lessons.length == 0"
-                    (click)="submit(step1.form.value, step2.form.value, step3.form.value)">
-                    Create Course
-                </button>
-
-            </div>
-
-        </mat-step>
-
-    </mat-horizontal-stepper>
-
-
-</div>
-
-
-<div class="scrolling-space">
-
-
+      <div class="stepper-buttons">
+        <button mat-raised-button matStepperPrevious>back</button>
+        <button mat-raised-button color="primary" matStepperNext>
+          Continue to Step 3
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

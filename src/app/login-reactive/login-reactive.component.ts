@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  NonNullableFormBuilder,
   Validators,
 } from "@angular/forms";
 import { createPasswordStrengthValidator } from "../validators/password-strength.validator";
@@ -28,7 +29,7 @@ export class LoginReactiveComponent implements OnInit {
     ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {}
 
@@ -38,6 +39,10 @@ export class LoginReactiveComponent implements OnInit {
 
   get password() {
     return this.form.controls["password"];
+  }
+
+  onReset() {
+    this.form.reset();
   }
 }
 

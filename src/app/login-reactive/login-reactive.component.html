@@ -58,6 +58,11 @@
       <button mat-raised-button color="primary" [disabled]="!form.valid">
         Login
       </button>
+
+      <button mat-raised-button (click)="onReset()">Reset</button>
+      <div>
+        {{ form.value | json }}
+      </div>
     </form>
 
     <!-- <button mat-raised-button (click)="reset()">Reset</button> -->
