@@ -7,4 +7,38 @@
   <mat-form-field>
     <input type="number" matInput placeholder="Price" formControlName="price" />
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Promotional period</mat-label>
+
+    <mat-date-range-input [rangePicker]="promotionPicker">
+      <input
+        matStartDate
+        placeholder="Start date"
+        type="text"
+        formControlName="promoStartAt"
+      />
+      <input
+        matEndDate
+        placeholder="End date"
+        type="text"
+        formControlName="promoEndAt"
+      />
+    </mat-date-range-input>
+
+    <mat-error *ngIf="form.errors?.promoPeriod && form.dirty"
+      >The start date must be before the end date.</mat-error
+    >
+
+    <mat-datepicker-toggle
+      [for]="promotionPicker"
+      matSuffix
+    ></mat-datepicker-toggle>
+
+    <mat-date-range-picker #promotionPicker></mat-date-range-picker>
+  </mat-form-field>
+
+  <div class="">
+    {{ form.value | json }}
+  </div>
 </div>
