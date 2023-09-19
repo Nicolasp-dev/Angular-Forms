@@ -10,7 +10,7 @@ import { createPromoRangeValidator } from "../../validators/date-range.validator
 export class CreateCourseStep2Component implements OnInit {
   form = this.fb.group(
     {
-      courseType: ["premium", Validators.required],
+      courseType: ["premium", [Validators.required]],
       price: [
         null,
         [
@@ -20,12 +20,12 @@ export class CreateCourseStep2Component implements OnInit {
           Validators.pattern("[0-9]+"),
         ],
       ],
+      thumbnail: [null],
       promoStartAt: [null],
       promoEndAt: [null],
     },
     {
       validators: [createPromoRangeValidator()],
-      updateOn: "blur",
     }
   );
 

@@ -6,9 +6,7 @@ export function courseTitleValidator(
   courses: CoursesService
 ): AsyncValidatorFn {
   return (control: AbstractControl) => {
-    console.log("Async Validation 01");
     return courses.findAllCourses().pipe(
-      tap(() => console.log("Async Validation")),
       map((courses) => {
         const course = courses.find(
           (course) =>
